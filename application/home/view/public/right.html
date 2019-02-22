@@ -1,0 +1,50 @@
+
+         <!--right-->
+         <div class="right" id="c_right">
+          <div class="s_about">
+          <h2>关于博主</h2>
+           <img src="{$user.portrait}" width="230" height="230" alt="博主"/>
+           <p>昵称：{$user.real_name}</p>
+           <p>职业：{$user.position}</p>
+           <p>简介：{$user.description}</p>
+           <p>
+		   Q Q：{$user.qq}
+           <!-- <a href="#" title="联系博主"><span class="left b_1"></span></a><a href="#" title="加入QQ群，一起学习！"><span class="left b_2"></span></a>
+           <div class="clear"></div> -->
+           </p>
+           <p>Wechat：{$user.wechat}</p>
+          </div>
+          <!--栏目分类-->
+           <div class="lanmubox">
+              <div class="hd">
+               <ul><li>精心推荐</li><li>最新文章</li><li class="hd_3">随机文章</li></ul>
+              </div>
+              <div class="bd">
+                <ul>
+				{volist name='recommend_knowledge' key='k' id='v'}
+					<li><a target="_blank" class="knowledge" href="home/index/learn_details?id={$v['id']}&su={$v['user_id']}" iddata="{$v['id']}" title="{$v.title}">{$v.title}</a></li>
+				{/volist}
+				</ul>
+               <ul>
+				{volist name='new_knowledge' key='k' id='v'}
+					<li><a target="_blank" class="knowledge" href="home/index/learn_details?id={$v['id']}&su={$v['user_id']}" iddata="{$v['id']}" title="{$v.title}">{$v.title}</a></li>
+				{/volist}
+				</ul>
+                 <ul>
+				{volist name='rand_knowledge' key='k' id='v'}
+					<li><a target="_blank" class="knowledge" href="home/index/learn_details?id={$v['id']}&su={$v['user_id']}" iddata="{$v['id']}" title="{$v.title}">{$v.title}</a></li>
+				{/volist}
+				</ul>
+                 
+                
+              </div>
+           </div>
+           <!--end-->
+           <div class="link">
+            <h2>友情链接</h2>
+			{volist name='friend_link' key='k' id='v'}
+            <p><a href="{$v.url}" target="_blank">{$v.title}</a></p>
+			{/volist}
+           </div>
+         </div>
+         <!--right end-->

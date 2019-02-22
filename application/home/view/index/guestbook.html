@@ -1,0 +1,100 @@
+{include file="public/header" /}
+    <style>
+		 p{
+			margin:10px;
+		 }
+	</style>
+    <!--content start-->
+    <div id="content">
+       <!--left-->
+         <div class="left" id="guestbook">
+           <div class="weizi">
+           <div class="wz_text">当前位置：<a href="./">首页</a>><h1>{$side_title}</h1></div>
+           </div>
+		   <!-- <form action='' method='post'> -->
+           <div class="g_content">
+		     <h1>有什么想对我说的嘛？</h1>
+			 <p>请留下您的邮箱，以便回复留言</p>
+			 <p>名字：<input type='text' id='username' name='username' placeholder='请输入您的名字'/>
+			 <p>邮箱：<input type='text' id='email' name='email' placeholder='请输入您的邮箱'/></p>
+			 <p>验证邮箱：<input type='text' id='email_vcode' name='email_vcode' placeholder='您的邮箱验证码'/> <button id='verify_email'>点击获取邮箱验证码</button></p>
+             
+			 <textarea id="content1" name='content' style="width:630px;height:220px;padding:10px;"></textarea>
+			 
+			 <p><input id='submit' type='submit' value='提交留言' style="margin:10px"/></p>
+           </div>
+		   <!-- </form> -->
+         </div>
+         <!--end left -->
+         <!--right-->
+         {include file="public/right" /}
+         <!--end  right-->
+         <div class="clear"></div>
+    </div>
+	<script>
+		$(function(){
+			//发送验证码
+			$('#verify_email').click(function(){
+				//判断邮箱
+			    var username = $('#username').val();
+				var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
+				var obj = document.getElementById("email"); //要验证的对象
+				if(obj.value === ""){ //输入不能为空
+					alert("输入不能为空!");
+					return false;
+				}else if(!reg.test(obj.value)){ //正则验证不通过，格式不对
+					alert("验证不通过!");
+					return false;
+				}else{
+					$.post('home/Index/sent_email',{useremail:obj.value,username:username},function(data){
+						alert(data)
+					})
+					return true;
+				}
+			})
+			
+			//提交留言时
+			$('#submit').click(function(){
+				//调用获取url中的参数su
+				var user_id = getParam('su');
+				// alert(user_id);
+			    var username = $('#username').val();
+			    var email = $('#email').val();
+			    var email_vcode = $('#email_vcode').val();
+			    var content1 = $('#content1').val();
+				// var patrn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){4,19}$/;
+				// <!-- alert(content1);return false; -->
+				if(username === ''){
+					alert('用户名不能为空');
+				}else if(email === ''){
+					alert('邮箱不能为空');
+				}else if(email_vcode === ''){
+					alert('验证码不能为空');
+				}else if(content1 === ''){
+					alert('留言内容不能为空');
+				// }else if(!patrn.exec(username)){
+				// 	alert("用户名以字母开头，请输入5到20位!");
+				// 	return false;
+				}else{
+				// <!-- alert(content);return false; -->
+					$.post('home/Index/add_msg',{message_user:username,email:email,email_vcode:email_vcode,content:content1,user_id:user_id},function(data){
+						alert(data);
+						location.href="home/index/guestbook?su="+user_id;
+					})
+					return true;
+				}
+			})
+			//获取url中的参数，只需要传入需要获取的参数名
+			function getParam(paramName) { 
+			    paramValue = "", isFound = !1; 
+			    if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) { 
+			        arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0; 
+			        while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++ 
+			    } 
+			    return paramValue == "" && (paramValue = null), paramValue 
+			} 
+
+		})
+	</script>
+    <!--content end-->
+	{include file="public/footer" /}

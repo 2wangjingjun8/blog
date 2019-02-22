@@ -1,0 +1,44 @@
+{include file="public/header" /}
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-head-line">{$name}</h1>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+                 <div class="row">
+					   <div class="col-md-12">
+								<div class="panel panel-primary">
+									  <!-- Default panel contents -->
+									  <div class="panel-heading">{$title}</div>
+
+									  <!-- Table -->
+									  <table class="table">
+										<thead>
+										  <tr>
+										       {volist name="field" id="v" key="k"}
+												<th>{$v}</th>
+                                           {/volist}
+												<th>操作</th>
+										  </tr>
+										</thead>
+										<tbody>
+										<button class="btn btn-xl btn-success update" onclick="window.location=`admin/{$c}/add`"><i class="glyphicon glyphicon-plus" ></i>添加</button>
+											{$html}
+										</tbody>
+									  </table>
+									  <div class='pagination'>
+									  {$rs->render()}
+									  </div>
+								 </div>
+						   </div>
+                     </div>
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+     {include file="public/footer" /}

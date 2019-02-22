@@ -1,0 +1,59 @@
+{include file="public/header" /}
+	<style>
+		.clear::after{
+			content: "";
+			visibility: hidden;
+			display: block;
+			height: 0;
+			clear: both;
+		}
+		.page .pagination li{
+			float:left;
+			margin:20px;
+		}
+	</style>
+    <!--content start-->
+    <div id="content">
+       <!--left-->
+         <div class="left" id="learn">
+           <div class="weizi">
+           <div class="wz_text">当前位置：<a href="./">首页</a>><h1>{$side_title}</h1></div>
+           </div>
+           <div class="l_content">
+              <!--wz-->
+			  
+
+
+
+
+			  {$html}
+           <!--wz end-->
+           </div>
+		   <div class='page'>
+			{$page}
+		   </div>
+         </div>
+         <!--end left -->
+         <!--right-->
+         {include file="public/right" /}
+         <!--end  right-->
+         <div class="clear"></div>
+         
+    </div>
+	 <script>
+		
+		//无刷新分页
+		/*$(function(){
+			$('.pagination li a').click(function(){
+				// <!-- alert(123); -->
+				var Url=$(this).attr('href');
+				$.getJSON(Url,{},function(data){
+					$('.page').html(data.page);
+					$('.l_content').html(data.html);
+				})
+				return false;
+			})
+		})*/
+	 </script>
+    <!--content end-->
+    {include file="public/footer" /}

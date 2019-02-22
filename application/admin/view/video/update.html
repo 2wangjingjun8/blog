@@ -1,0 +1,54 @@
+{include file="public/header" /}
+<!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-head-line">{$name}</h1>
+
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+				<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+						      <div class="panel panel-info">
+									<div class="panel-heading">
+									   {$title}
+									</div>
+									<div class="panel-body">
+										<form role="form" action="" method="post" enctype="multipart/form-data">
+											<div class="form-group">
+												<input class="form-control" type="hidden" name="id"value='{$rs.id}'/>
+											</div>
+										    {:inputTag("视频名称","name",$rs.name)}
+
+											<div class="form-group"><label>视频</label>
+												<input class="form-control" type="file" name="url" id="url">
+												<p class="help-block"></p>
+											</div>
+
+
+											{notempty name="rs.url"}
+											<video width="180" height="120" controls="controls">
+											  <source src="{$rs.url} type="video/ogg">
+											  <source src="{$rs.url}" type="video/mp4">
+											你的浏览器不支持播放！
+											</video>
+											{/notempty}
+
+											{:textareaTag("视频描述","description",$rs.description)}
+									    <button type="submit" class="btn btn-info">更新上传</button>
+
+										</form>
+									</div>
+							   </div>
+						 </div>
+			
+			     </div>
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+	{include file="public/footer" /}

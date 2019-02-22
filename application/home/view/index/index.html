@@ -1,0 +1,60 @@
+{include file="public/header" /}
+
+    <!--content start-->
+	<style>
+		.clear::after{
+			content: "";
+			visibility: hidden;
+			display: block;
+			height: 0;
+			clear: both;
+		}
+		.page .pagination li{
+			float:left;
+			margin:20px;
+		}
+	</style>
+    <div id="content">
+         <!--left-->
+         <div class="left" id="c_left">
+           <div class="s_tuijian">
+           <h2>文章<span>推荐</span></h2>
+           </div>
+          <div class="content_text">
+           <!--wz-->
+		   {$html}
+           <!--wz end-->
+           </div>
+		   <div class='page'>
+			{$page}
+		   </div>
+         </div>
+         <!--left end-->
+         <!--right-->
+         {include file="public/right" /}
+         <!--right end-->
+         <div class="clear"></div>
+    </div>
+	<script>
+		//无刷新分页
+		$(function(){
+			// alert(123);
+			/*$('body').on('click','.pagination>li',function(){
+            	console.log($(this).html());
+        	});*/
+		})
+		/*$(function(){
+			$('body').on('click','.pagination li a',function(){
+			// alert(123)
+				var Url=$(this).attr('href');
+				$.getJSON(Url,{},function(data){
+					// alert(data)
+					$('.page').html(data.page);
+					$('.content_text').html(data.html);
+				})
+			return false;
+			});
+		})*/
+	</script>
+    <!--content end-->
+	{include file="public/footer" /}

@@ -1,0 +1,46 @@
+{include file="public/header" /} 
+ <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-head-line">{$name}</h1>
+
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+				<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						      <div class="panel panel-info">
+									<div class="panel-heading">
+									   {$title}
+									</div>
+									<div class="panel-body">
+										<form role="form" action="" method="post">
+											<div class="form-group">
+												<input class="form-control" type="hidden" name="id"value='{$rs.id}'/>
+											</div>
+											
+											{:inputTag("真实姓名","real_name",$rs.real_name)}
+											{:inputTag("登录账户名","name",$rs.name)}
+											 <div class="form-group">
+														<label>密码</label>
+														<input class="form-control" type="password" name="password"/>
+														<p class="help-block">密码不能少于6位,如果不需要修改密码请留空</p>
+											 </div>
+                                        <hr>											
+									    <button type="submit" class="btn btn-info">提交更新 </button>
+
+										</form>
+									</div>
+							   </div>
+						 </div>
+			
+			     </div>
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+	{include file="public/footer" /}

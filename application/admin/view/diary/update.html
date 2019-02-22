@@ -1,0 +1,40 @@
+{include file="public/header" /}
+<!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-head-line">{$name}</h1>
+
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+				<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+						      <div class="panel panel-info">
+									<div class="panel-heading">
+									   {$title}
+									</div>
+									<div class="panel-body">
+										<form role="form" action="" method="post" enctype="multipart/form-data">
+											<div class="form-group">
+												<input class="form-control" type="hidden" name="id"value='{$rs.id}'/>
+											</div>
+										    {:inputTag("标题","title",$rs.title)}
+											{:uploadTag("配图","portrait",$rs.portrait)}
+											{:textareaTag("文章内容","content",$rs.content)}
+									    <button type="submit" class="btn btn-info">更新日记</button>
+
+										</form>
+									</div>
+							   </div>
+						 </div>
+			
+			     </div>
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+	{include file="public/footer" /}

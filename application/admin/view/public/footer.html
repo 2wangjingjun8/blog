@@ -1,0 +1,68 @@
+
+    <div id="footer-sec">
+        Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+    </div>
+    <!-- /. FOOTER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="{$baseurl}static/assets/js/bootstrap.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="{$baseurl}static/assets/js/jquery.metisMenu.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="{$baseurl}static/assets/js/custom.js"></script>
+
+	
+	
+	<script>
+	$(function(){
+			  var content;
+			  var brand_info;
+			  var intro;
+			  //调用编辑器
+			   KindEditor.ready(function(K) {
+					content = K.create('textarea[name="content"]', {
+						allowFileManager : true
+					});
+			  });
+			   KindEditor.ready(function(K) {
+					content = K.create('textarea[name="brand_info"]', {
+						allowFileManager : true
+					});
+			  });
+			   KindEditor.ready(function(K) {
+					content = K.create('textarea[name="intro"]', {
+						allowFileManager : true
+					});
+			  });
+			  $('#recommand_start').click(function(){
+					return Calendar('recommand_start');
+			  });
+			  $('#recommand_end').click(function(){
+					return Calendar('recommand_end');
+			  });
+			  
+			  
+            //分类下拉选择的数据时候			
+			$('#catid').change(function(){
+			        if($(this).val().length<1){
+			          $('#attrArea').html('');
+					  return false;
+					}
+			        //发送一个ajax的请求去 admin/product/getAttr?catid=xxx
+                     $.get(" admin/product/getAttr?catid="+$(this).val(), function(data){		         
+							 $('#attrArea').html(data);
+					});
+			});
+			
+			
+	        //删除按钮点击时候
+	        $('.del').click(function(){
+		        if(confirm('真的要删除吗')==false){
+				    return false;
+				}
+		    });
+	});
+	</script>
+</body>
+</html>

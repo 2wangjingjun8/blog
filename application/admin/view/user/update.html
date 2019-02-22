@@ -1,0 +1,47 @@
+{include file="public/header" /}
+<!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-head-line">{$name}</h1>
+
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+				<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+						      <div class="panel panel-info">
+									<div class="panel-heading">
+									   {$title}
+									</div>
+									<div class="panel-body">
+										<form role="form" action="" method="post" enctype="multipart/form-data">
+											<div class="form-group">
+												<input class="form-control" type="hidden" name="id"value='{$rs.id}'/>
+											</div>
+										    {:inputTag("昵称","real_name",$rs.real_name)}
+										   
+										    {:inputTag("职业","position",$rs.position)}
+										    {:inputTag("QQ","qq",$rs.qq)}
+										    {:inputTag("微信","wechat",$rs.wechat)}
+										    {:inputTag("电话","phone",$rs.phone)}
+											{:uploadTag("头像","portrait",$rs.portrait)}
+											{:textareaTag("激励语","saying",$rs.saying)}
+											{:textareaTag("简介","description",$rs.description)}
+											{:textareaTag("自我介绍","content",$rs.content)}
+									    <button type="submit" class="btn btn-info">保存</button>
+
+										</form>
+									</div>
+							   </div>
+						 </div>
+			
+			     </div>
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+	{include file="public/footer" /}

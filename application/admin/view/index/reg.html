@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<base href={$baseurl}" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{$title}</title>
+
+    <!-- BOOTSTRAP STYLES-->
+    <link href="{$baseurl}static/assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="{$baseurl}static/assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <script src="{$baseurl}static/assets/js/jquery-1.10.2.js"></script>
+<style>
+.panel-body{
+	border: 1px solid white;
+	background-color: #8383b3;
+}
+h5{
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+}
+.container{
+	padding-top: 50px; 
+}
+.login_req{
+	text-align: center;
+}
+.login_req a{
+	background-color: blue;
+	margin: 5px 16px;
+}
+</style>
+</head>
+<body style="background-color: #E2E2E2;">
+    <div class="container">
+        <div class="row text-center " style="padding-top:40px;">
+            <div class="col-md-12">
+                <!-- <img src="{$baseurl}static/assets/img/blog_logo.jpg" width='100' height='50'/> -->
+            </div>
+        </div>
+         <div class="row">
+               
+                <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                           
+                            <div class="panel-body">
+                                <form role="form" action=""  method="POST">
+                                    <hr />
+                                    <h5>欢迎使用海哥博客系统</h5>
+                                       <br />
+                                    <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
+                                            <input type="text" class="form-control" name="name" placeholder="注册用户账号" id="count_name" />
+                                    </div>
+                                    <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>
+                                            <input type="text" class="form-control" name="real_name" placeholder="注册昵称" id="real_name" />
+                                    </div>
+                                    <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
+                                            <input type="password" class="form-control" name="password"  placeholder="登陆密码" id='password' />
+                                    </div>
+                                    <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
+                                            <input type="password" class="form-control" name="repassword"  placeholder="确认密码" id='repassword' />
+                                    </div>
+                                            <span id="repass_msg"></span>
+                                    <div class="form-group">
+                                            <label>验证码：</label>
+													<input type="text" name="captcha" id='vcode'  style="width:100px"/>
+													<div><img src="{:captcha_src()}" alt="captcha" id='captcha' width='200' height='50'  onclick="this.src='{:captcha_src()}?num='+Math.random()" /></div>
+													
+                                    </div>
+                                    <div class="login_req">
+										<a class="btn btn-primary reg">注册</a>	
+										<a class="btn btn-primary" href="admin/index/login">已经注册，去登陆</a>	
+                                    </div>
+                                     
+                                    </form>
+                            </div>
+                           
+                        </div>
+                
+                
+        </div>
+    </div>
+
+</body>
+<script>
+    $(function(){
+	
+		
+		$('#repassword').blur(function(){
+			var password = $("#password").val();
+			var repassword = $("#repassword").val();
+			if(password !== repassword){
+				$('#repass_msg').html('两次输入的密码不一致！');
+				return false;
+			}else{
+				$('#repass_msg').html('');
+				return false;
+			}
+		})
+	    $('.reg').click(function(){
+			
+			var name = $("#count_name").val();
+			var real_name = $("#real_name").val();
+			var password = $("#password").val();
+			var repassword = $("#repassword").val();
+			var vcode = $("#vcode").val();
+			var rem = $('#rem').attr('status');
+			if(name == ''){
+				alert('用户名不能为空');
+				return false;
+			}else if(real_name == ''){
+				alert('昵称不能为空');
+				return false;
+			}else if(password == ''){
+				alert('密码不能为空');
+				return false;
+			}else if(repassword == ''){
+				alert('确认密码不能为空');
+				return false;
+			}else if(vcode == ''){
+				alert('验证码不能为空');
+				return false;
+			}else{
+				$.post('admin/index/reg',{name:name,password:password,real_name:real_name,captcha:vcode},function(data){
+				   if(data.code == '100'){
+						alert(data.msg);
+				        location.href='admin/index/login';
+				   }else{
+				       alert(data.msg);
+					   $('#captcha').attr('src','{:captcha_src()}?num='+Math.random());
+					   return  false;
+				   }
+				})
+			}
+		})
+		
+	})
+</script>
+</html>

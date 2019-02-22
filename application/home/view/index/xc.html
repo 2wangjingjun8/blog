@@ -1,0 +1,82 @@
+{include file="public/header" /}
+<script type="text/javascript" src="static/home/js/common.js"></script>
+<script type="text/javascript" src="static/home/js/pinterest_grid.js"></script>
+<link rel="stylesheet" href="static/home/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="static/home/css/default.css">
+	<style type="text/css">
+		#gallery-wrapper {
+		position: relative;
+		max-width: 75%;
+		width: 75%;
+		margin:50px auto;
+		}
+		img.thumb {
+		width: 100%;
+		max-width: 100%;
+		height: auto;
+		}
+		.white-panel {
+		position: absolute;
+		background: white;
+		border-radius: 5px;
+		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+		padding: 10px;
+		}
+		.white-panel h1 {
+		font-size: 1em;
+		}
+		.white-panel h1 a {
+		color: #A92733;
+		}
+		.white-panel:hover {
+		box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+		margin-top: -5px;
+		-webkit-transition: all 0.3s ease-in-out;
+		-moz-transition: all 0.3s ease-in-out;
+		-o-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+		}
+		body{
+			background: #E3E3E5 url("static/home/images/bg.jpg") 50% top scroll no-repeat;
+		}
+	</style>
+    <!--content start-->
+    <div id="content_xc">
+         <div class="weizi">
+           <div class="wz_text">当前位置：<a href="./">首页</a>><h1>{$side_title}</h1></div>
+         </div>
+         <div class="xc_content">
+         <section id="gallery-wrapper">
+         {notempty name="rs"}
+			{volist name='rs' key='k' id='v'}
+				<article class="white-panel">
+					<img src="{$v.pic_url}" class="thumb">
+					<h1><a href="#">{$v.pic_name}</a></h1>
+					<p>时间：{$v.ctime}</p>
+					<p>{$v.description}</p>
+				</article>
+			{/volist}
+			{else/}
+			<article class="white-panel">
+					<p style="text-align:center"><b>还没有上传任何图片</b></p>
+				</article>
+         {/notempty}
+         </section>
+		 </div>
+    </div>
+    <!--content end-->
+ {include file="public/footer" /}
+<script type="text/javascript">
+		$(function(){
+			$("#gallery-wrapper").pinterest_grid({
+				no_columns: 4,
+                padding_x: 10,
+                padding_y: 10,
+                margin_bottom: 50,
+                single_column_breakpoint: 700
+			});
+			
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+
+    <!--footer start-->
+    <div id="footer">
+     <p>Design by:<a href="http://www.duanliang920.com" target="_blank">个人博客</a> 2018-11-11</p>
+					<p><a href="http://www.miitbeian.gov.cn" style="color:black;" target="_blank">粤ICP备18029644号</a></p>
+    </div>
+    <!--footer end-->
+    <script type="text/javascript">jQuery(".lanmubox").slide({easing:"easeOutBounce",delayTime:400});</script>
+    <script  type="text/javascript" src="static/home/js/nav.js"></script>
+	<!-- <script type="text/javascript">
+		var ue = UE.getEditor('editor');
+	</script> -->
+<script>
+	$(function(){
+		/*  //调用编辑器
+		   KindEditor.ready(function(K) {
+				content = K.create('textarea[name="content"]', {
+					allowFileManager : true
+				});
+		  });*/
+		//增加点击阅读数
+		$('.knowledge').click(function(){
+			var id = $(this).attr('iddata');
+			$.get('home/index/add_view',{id:id},function(){
+				location.href="home/index/learn_details?id="+id;
+			})
+			return false;
+		})
+		  
+	})
+	
+</script>
+</body>
+</html>

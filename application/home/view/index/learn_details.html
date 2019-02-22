@@ -1,0 +1,101 @@
+{include file="public/header" /}
+	<style>
+		.clear::after{
+			content: "";
+			visibility: hidden;
+			display: block;
+			height: 0;
+			clear: both;
+		}
+		.page .pagination li{
+			float:left;
+			margin:20px;
+		}
+		.l_content p{
+			margin-top:20px;
+		}
+		.l_content p span{
+			margin:10px 20px;
+		}
+		.l_content div{
+			text-indent:2em;
+			margin:15px 10px;
+		}
+		.comment{
+			margin-top: 10px
+		}
+	</style>
+    <!--content start-->
+    <div id="content">
+       <!--left-->
+         <div class="left" id="learn">
+           <div class="weizi">
+           <div class="wz_text">当前位置：<a href="./">首页</a>><h1>{$side_title}</h1></div>
+           </div>
+           <div class="l_content">
+              <!--wz-->
+			  {$html}
+           <!--wz end-->
+           </div>
+			<div style="margin-top:20px;border-top:20px solid #e3e3e5">
+				<textarea style="width:98%;height:60px;padding:1%" placeholder="请发表评论" id="comment_content"></textarea>
+				<button style="float:right;margin:10px 6px 5px auto" id="send_comment">发表评论</button>
+
+				<script>
+					$(function(){
+						$("#send_comment").click(function(){
+							var content = $('#comment_content').val();
+							var comment_person = $('#author').attr('comment_person');
+							/*alert(author);
+							return;*/
+							if(content == ""){
+								alert('评论内容不能为空！');
+								return;
+							}else if(author == ""){
+								alert('请先登录！');
+								return;
+							}
+
+							var article_id = $('h2').attr('data-id');
+							$.post('home/index/send_comment',{content:content,comment_person:comment_person,article_id:article_id},function(rs){
+								if(rs == 1){
+									alert('评论成功');
+									location.href="/home/index/learn_details?id="+article_id;
+								}else{
+									alert('评论失败');
+								}
+							})
+
+						})
+					})
+				</script>
+				<div style="margin-top:40px;padding:0 20px">
+					<P>评论列表：</P>
+					<!-- 评论内容 -->
+					<ul class="comment">
+
+						{volist name="comment_data" id="vo"}
+						<li style="border-bottom:1px solid red">
+							<b>{$vo.comment_person}</b>
+							<p>{$vo.content}</p>
+							{notempty name="vo.reply_content"}
+							<i style="background:yellow">作者回复：</i>
+							<p>{$vo.reply_content}</p>
+							{/notempty}
+						</li>
+						{/volist}
+
+					</ul>
+				</div>
+			</div>
+         </div>
+
+         <!--end left -->
+         <!--right-->
+         {include file="public/right" /}
+         <!--end  right-->
+         <div class="clear"></div>
+         
+    </div>
+    <!--content end-->
+    {include file="public/footer" /}

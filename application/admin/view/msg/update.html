@@ -1,0 +1,62 @@
+{include file="public/header" /}
+<!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-head-line">{$name}</h1>
+
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+				<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+						      <div class="panel panel-info">
+									<div class="panel-heading">
+									   {$title}
+									</div>
+									<div class="panel-body">
+										<form role="form" action="" method="post">
+											<div class="form-group">
+												<input class="form-control" type="hidden" name="id"value='{$rs.id}'/>
+											</div>
+											 <div class="form-group">
+														<label>留言用户：</label>
+														{$rs.message_user}
+														<input type="hidden" value="{$rs.message_user}" name="message_user" />
+											 </div>
+											 <div class="form-group">
+														<label>留言邮箱：</label>
+														{$rs.email}
+														<input type="hidden" value="{$rs.email}" name="email" />
+											 </div>
+											 <div class="form-group">
+														<label>留言时间：</label>
+														{$rs.ctime}
+											 </div>
+											 <div class="form-group">
+														<label>留言内容：</label>
+														{$rs.content}
+											 </div>
+											 {notempty name="rs.reply_content"}
+												
+														<label>回复内容：</label>{$rs.reply_content}
+											{else/}
+
+												{:textareaTag("回复留言：","reply_content",$rs.reply_content)}
+									   			<button type="submit" class="btn btn-info">发表回复</button>
+											{/notempty}
+											
+										</form>
+									</div>
+							   </div>
+						 </div>
+			
+			     </div>
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+	{include file="public/footer" /}
